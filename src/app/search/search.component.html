@@ -1,0 +1,26 @@
+<div *ngIf="switch || $SearchMovies?.length == 0" class="h-screen w-screen p-1 md:p-16 flex flex-col justify-start items-center md:gap-24 bg-black">
+<img class="h-[60%] w-[60%] md:h-1/2 md:w-1/2 object-contain" src="../../assets/images/noresult.png" alt="">
+<p class="text-text-color text-2xl md:text-4xl lg:text-5xl mt-8 md:mt-0 font-medium text-center">Sorry... No Result Found <br> Try Something Else </p>
+<span class="h-[0.1px] w-[45%] mt-4 md:-mt-14 bg-white "></span>
+</div>
+
+<section *ngIf="!switch" class="bg-primary-color text-text-color">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-wrap -m-4">
+
+      <div *ngFor="let trend of $SearchMovies" class="lg:w-1/4 md:w-1/2 p-4 w-full">
+        <div>
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="{{image_url}}{{trend.poster_path}}">
+          </a>
+          <div class="mt-4">
+            <h3 class="text-xs tracking-widest title-font mb-1">{{trend.original_name}}</h3>
+            <h2 class="title-font text-lg font-medium">{{trend.title}}</h2>
+            <p class="mt-1 text-text2-color">{{trend.release_date}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

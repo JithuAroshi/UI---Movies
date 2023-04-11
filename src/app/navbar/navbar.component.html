@@ -1,0 +1,46 @@
+
+<header class="text-gray-600 w-screen z-50 px-7 pr-8 py-4 pb-8 md:py-9 bg-primary-color">
+  <div class="flex flex-col md:flex-row gap-5 md:gap-16 justify-between items-center bg-primary-color">
+
+  <div class="flex w-full justify-between ">
+    <button (click)="Menuchange()" class="lg:hidden ">
+      <div *ngIf="!menu">
+       <span class="material-symbols-rounded">
+         menu
+         </span>
+      </div>
+      <div *ngIf="menu">
+       <span class="material-symbols-rounded">
+         close
+         </span>
+      </div>
+   </button>
+
+   <div class="flex md:block">
+     <a class="flex lg:order-none font-medium items-center text-highlight ">
+<img class="hidden md:block h-[25%] w-[25%]" src="../../assets/images/logo.png" alt="">
+       <span class=" flex my-auto ml-1 text-xl lg:text-3xl text-text2-color">UI - MOVIES</span>
+     </a>
+   </div>
+   <img class="md:hidden h-[10%] w-[10%]" src="../../assets/images/logo.png" alt="">
+  </div>
+
+<!-- ------------------------------------------------------------------------Search---------------------------------------------------------- -->
+
+  <div class="h-max bg-primary-color flex flex-col justify-center">
+    <div class="relative w-max sm:mx-auto">
+      <div class="overflow-hidden z-0 rounded-full relative p-[3px]">
+        <div name="search" class="relative flex z-50 bg-primary-color rounded-full">
+          <input type="text" [(ngModel)]="Search" placeholder="Search the movie here..." class="rounded-full flex-1 px-3 py-2 text-text-color bg-primary-color focus:outline-none">
+          <button [routerLink]="['/SearchResult',Search]" class="bg-highlight/20 text-sm text-white rounded-full font-semibold px-2 py-[2px] hover:bg-highlight/40 focus:bg-highlight focus:outline-none">Search</button>
+        </div>
+        <div class="glow glow-1 z-10 bg-highlight/80 absolute"></div>
+        <div class="glow glow-2 z-20 bg-black absolute"></div>
+        <div class="glow glow-3 z-30 bg-white/50 absolute"></div>
+        <div class="glow glow-4 z-40 bg-red-800/70 absolute"></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</header>

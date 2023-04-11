@@ -1,0 +1,216 @@
+
+<div class="bg-primary-color">
+  <section class="text-text-color bg-primary-color pb-6 md:pb-9 lg:pb-12">
+    <div class="container md:w-full lg:h-[640px] mx-auto flex pb-24 md:py-12 md:pb-16 md:pr-16 flex-col md:flex-row items-center md:items-start md:justify-end relative">
+
+      <div class="h-full w-full mb-10 md:mb-0 relative md:absolute md:inset-0">
+        <img class="md:hidden h-full w-full object-cover object-center relative " alt="hero" src="{{image_url}}{{detail_array.backdrop_path}}">
+        <div class="md:hidden absolute top-[10%] left-[5%] h-[80%] "><img class="h-full w-full" src="{{image_url}}{{detail_array.poster_path}}" alt=""></div>
+
+        <img class="hidden md:flex h-full w-full object-cover object-center relative rounded md:opacity-25" alt="hero" src="{{image_url}}{{detail_array.backdrop_path}}">
+        <div class="absolute hidden md:flex top-[8%] left-[3%] h-[80%] lg:h-[85%] rounded-lg"><img class="h-full w-full rounded-lg" src="{{image_url}}{{detail_array.poster_path}}" alt=""></div>
+
+      </div>
+      <div class="hidden md:flex h-12 md:w-[180%] lg:w-[800px] "></div>
+      <div class="flex flex-col md:items-start lg:items-center lg:justify-center md:text-left lg:h-full lg:w-full items-center text-center relative ">
+        <div class="flex items-center justify-around lg:justify-between lg:px-6 text-xl lg:text-4xl mb-4 font-medium text-text-color w-full ">
+          <p>{{detail_array.original_title}} <br> <span class="text-text2-color ">{{detail_array.release_date.slice(0,4)}}</span>  </p>
+
+        </div>
+
+  <div class="flex items-center justify-around lg:justify-start lg:gap-6 w-full px-6 py-3 ">
+    <div class="flex flex-col lg:flex-row justify-center items-center gap-1 lg:gap-3">
+      <p class="hidden lg:block text-xl">User Score</p>
+      <div class="text-xs md:text-sm h-12 w-12 md:h-11 md:w-11 lg:h-14 lg:w-14 flex justify-center items-center rounded-full text-white bg-primary-color relative">
+        <p class="absolute top-[30%] text-sm lg:text-base">{{math.floor(detail_array.vote_average*10)}}%</p>
+        <svg class="rotate-[-90deg] lg:h-[48px] lg:w-[48px] " width="47px" height="47px" viewBox="0 0 100 100">
+          <circle cx="52.5" cy="52.5" r="50" fill="transparent" [attr.stroke]="ratingcolor2(detail_array.vote_average*10)" [attr.stroke-dasharray] = "314" stroke-width="9" class="scale-[0.95] "/>
+        <circle cx="52.5" cy="52.5" r="50" fill="transparent" [attr.stroke]="ratingcolor(detail_array.vote_average*10)" [attr.stroke-dashoffset] = "(3.14*(100-detail_array.vote_average*10))" [attr.stroke-dasharray] = "314" stroke-width="9" stroke-linecap="round" class="scale-[0.95] "/>
+        </svg>
+      </div>
+      <p class="text-sm md:text-base lg:hidden">User Score</p>
+    </div>
+
+     <span class="h-16 lg:h-16 lg:mx-5 w-[0.5px] bg-text2-color"></span>
+
+  <button class="flex p-2 rounded-md h-max lg:text-xl text-text-color ">
+    <span class="material-symbols-rounded">
+      play_arrow
+      </span>
+  <p>Trailer</p>
+    </button>
+
+  </div>
+
+        <p class="w-full mb-8 leading-relaxed px-6 text-sm lg:text-base font-light text-text2-color md:text-text-color">{{detail_array.media_type}} | {{detail_array.original_language}}glish | {{detail_array.release_date}} <br> vote : {{detail_array.vote_count}} | popularity : {{detail_array.popularity}} </p>
+        <h1 class="text-xl lg:text-2xl font-medium mb-2 w-full flex justify-start px-6">Overview</h1>
+        <p class="mb-4 leading-relaxed px-6 text-start text-sm lg:text-lg font-light text-text2-color md:text-text-color "> {{detail_array.overview}} </p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------------------------Cast & Crew-------------------------------------------------------------------------- -->
+
+  <section class="text-text-color p-12 border-b-[0.5px] border-text2-color/20">
+    <div *ngIf="cast_array.cast?.length != 0" class=" w-max text-2xl lg:text-3xl pr-4 mb-8 font-medium text-text-color border-b-[1px] border-highlight">Cast</div>
+      <div class="flex flex-wrap -m-2 ">
+        <div *ngFor="let cast of cast_array.cast.slice(0,6)" class="p-2 lg:w-1/3 md:w-1/2 w-full">
+          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
+            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="{{image_url}}{{cast.profile_path}}">
+            <div class="flex-grow">
+              <h2 class="text-white title-font font-medium">{{cast.name}}</h2>
+              <h2 class="text-white title-font font-medium">({{cast.character}})</h2>
+              <p class="text-gray-600">{{cast.known_for_department}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="cast_array.crew.length != 0" class=" w-max text-2xl lg:text-3xl pr-4 my-8 font-medium text-text-color border-b-[1px] border-highlight">Crew</div>
+      <div class="flex flex-wrap -m-2 ">
+        <div *ngFor="let crew of cast_array.crew.slice(0,6)" class="p-2 lg:w-1/3 md:w-1/2 w-full">
+          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
+            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="{{image_url}}{{crew.profile_path}}">
+            <div class="flex-grow">
+              <h2 class="text-white title-font font-medium">{{crew.name}}</h2>
+              <p class="text-gray-600">{{crew.known_for_department}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<button (click)="CastCrew()" class="text-text2-color hover:text-text-color text-2xl pt-14 flex justify-center items-center">
+  <p>Full Cast & Crew</p>
+  <span class="material-symbols-rounded text-6xl -ml-3">
+    arrow_drop_down
+    </span>
+</button>
+
+<ng-container *ngIf="castcrew">
+      <div class="flex flex-wrap -m-2 mt-2">
+        <div *ngFor="let cast of cast_array.cast" class="p-2 lg:w-1/3 md:w-1/2 w-full">
+          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
+            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="{{image_url}}{{cast.profile_path}}">
+            <div class="flex-grow">
+              <h2 class="text-white title-font font-medium">{{cast.name}}</h2>
+              <p class="text-gray-600">{{cast.known_for_department}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap -m-2 ">
+        <div *ngFor="let crew of cast_array.crew" class="p-2 lg:w-1/3 md:w-1/2 w-full">
+          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
+            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="{{image_url}}{{crew.profile_path}}">
+            <div class="flex-grow">
+              <h2 class="text-white title-font font-medium">{{crew.name}}</h2>
+              <p class="text-gray-600">{{crew.known_for_department}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+</ng-container>
+
+  </section>
+
+  <!-- ------------------------------------------------------------------------Reviews----------------------------------------------------------------------------------- -->
+
+  <section class="">
+    <div class="container px-5 py-24 mx-auto">
+      <h1 class="text-2xl lg:text-3xl font-medium title-font text-white mb-12 text-center pb-3 border-b-[1px] border-highlight">Reviews</h1>
+      <div class="flex flex-wrap -m-4">
+
+        <div *ngFor="let view of reviews.results.slice(0,6)" class="p-4 md:w-1/2 w-full ">
+          <div class="h-full bg-text2-color bg-opacity-10 p-8 rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-white mb-4" viewBox="0 0 975.036 975.036">
+              <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+            </svg>
+            <p class="leading-relaxed mb-6 text-text2-color"> {{view.content.slice(0,586)}} </p>
+            <a class="inline-flex items-center">
+              <img alt="testimonial" src="{{image_url}}{{view.author_details.avatar_path}}" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+              <span class="flex-grow flex flex-col pl-4">
+                <span class="title-font font-medium text-white">{{view.author}}</span>
+                <span class="text-gray-500 text-sm">{{view.created_at.slice(0,10)}}</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- -----------------------------------------------------------------------Posters----------------------------------------------------------------------- -->
+
+  <section class="">
+    <h1 class="text-2xl lg:text-3xl font-medium title-font text-white mb-12 text-center pb-3 mx-5 border-b-[1px] border-highlight">Posters</h1>
+    <div class="container py-4 md:py-12 lg:py-24 mx-auto flex flex-wrap">
+      <div class="flex flex-col md:flex-row justify-center items-center overflow-hidden opacity-60">
+        <div class="flex w-1/2">
+          <div class="md:p-2 p-1 w-1/2  rotate-[15deg]">
+            <img alt="gallery" class="w-full object-cover h-full object-center block opacity-750" src="{{image_url}}{{posters.posters[12].file_path}}">
+          </div>
+          <div class="md:p-2 p-1 w-1/2 -rotate-[25deg]">
+            <img alt="gallery" class="w-full object-cover h-full object-center block opacity-750" src="{{image_url}}{{posters.posters[6].file_path}}">
+          </div>
+        </div>
+        <div class="flex w-1/2 ">
+          <div class="md:p-2 p-1 w-1/2 rotate-[10deg]">
+            <img alt="gallery" class="w-full object-cover h-full object-center block opacity-750" src="{{image_url}}{{posters.posters[8].file_path}}">
+          </div>
+          <div class="md:p-2 p-1 w-1/2 rotate-[30deg]">
+            <img alt="gallery" class="w-full object-cover h-full object-center block opacity-750" src="{{image_url}}{{posters.posters[9].file_path}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- --------------------------------------------------------------------Similar & Recommended------------------------------------------------------------------------- -->
+
+  <div *ngIf="$similar_array?.length != 0" class=" w-max text-2xl lg:text-3xl pr-4 mx-4 md:mx-8 lg:mx-16 mt-10 mb-2 md:mb-4 lg:mb-8 font-medium border-b-[1px] border-highlight text-text-color ">Similar Movies</div>
+
+  <div class="w-full flex  overflow-x-scroll overflow-y-hidden border-b-[0.5px] border-text2-color/20">
+    <div *ngFor="let trend of $similar_array" class="h-full w-full flex flex-col item-start p-3 md:p-4 relative " [routerLink]="['/detailpage',trend.id]">
+      <div class="h-52 w-36 md:h-60 md:w-44 lg:h-72 lg:w-52 z-10 relative " >
+        <img class="h-full w-full object-contain rounded-md " src="{{image_url}}{{trend.poster_path}}" alt="">
+        <div class="text-sm h-12 w-12 flex justify-center items-center rounded-full text-white bg-primary-color absolute -bottom-6 left-0">
+          <p class="absolute top-[31%]">{{math.floor(trend.vote_average*10)}}%</p>
+          <svg class="rotate-[-90deg]" width="47px" height="47px" viewBox="0 0 100 100">
+            <circle cx="52.5" cy="52.5" r="50" fill="transparent" [attr.stroke]="ratingcolor2(trend.vote_average*10)" [attr.stroke-dasharray] = "314" stroke-width="9" class="scale-[0.95]"/>
+          <circle cx="52.5" cy="52.5" r="50" fill="transparent" [attr.stroke]="ratingcolor(trend.vote_average*10)" [attr.stroke-dashoffset] = "(3.14*(100-trend.vote_average*10))" [attr.stroke-dasharray] = "314" stroke-width="9" stroke-linecap="round" class="scale-[0.95]"/>
+          </svg>
+        </div>
+      </div>
+      <div class="p-1 mt-9 w-full">
+        <p class="text-sm md:text-base font-medium text-text-color relative"> {{trend.original_title}} </p>
+        <p class="text-sm md:text-base text-text2-color relative"> {{trend.release_date}} </p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="$recommended_array?.length != 0" class=" w-max text-2xl lg:text-3xl pr-4 mx-4 md:mx-8 lg:mx-16 mt-10 mb-2 md:mb-4 lg:mb-8 font-medium border-b-[1px] border-highlight text-text-color ">Recommended Movies</div>
+
+  <div class="w-full flex  overflow-x-scroll overflow-y-hidden border-b-[0.5px] border-text2-color/20">
+    <div *ngFor="let trend of $recommended_array" class="h-full w-full flex flex-col item-start p-3 md:p-4 relative " [routerLink]="['/detailpage',trend.id]">
+      <div class="h-52 w-36 md:h-60 md:w-44 lg:h-72 lg:w-52 z-10 relative " >
+        <img class="h-full w-full object-contain rounded-md " src="{{image_url}}{{trend.poster_path}}" alt="">
+        <div class="text-sm h-12 w-12 flex justify-center items-center rounded-full text-white bg-primary-color absolute -bottom-6 left-0">
+          <p class="absolute top-[31%]">{{math.floor(trend.vote_average*10)}}%</p>
+          <svg class="rotate-[-90deg]" width="47px" height="47px" viewBox="0 0 100 100">
+            <circle cx="52.5" cy="52.5" r="50" fill="transparent" [attr.stroke]="ratingcolor2(trend.vote_average*10)" [attr.stroke-dasharray] = "314" stroke-width="9" class="scale-[0.95]"/>
+          <circle cx="52.5" cy="52.5" r="50" fill="transparent" [attr.stroke]="ratingcolor(trend.vote_average*10)" [attr.stroke-dashoffset] = "(3.14*(100-trend.vote_average*10))" [attr.stroke-dasharray] = "314" stroke-width="9" stroke-linecap="round" class="scale-[0.95]"/>
+          </svg>
+        </div>
+      </div>
+      <div class="p-1 mt-9 w-full">
+        <p class="text-sm md:text-base font-medium text-text-color relative"> {{trend.original_title}} </p>
+        <p class="text-sm md:text-base text-text2-color relative"> {{trend.release_date}} </p>
+      </div>
+    </div>
+  </div>
+
+</div>
