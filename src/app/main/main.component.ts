@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component , HostListener } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
 import { Movie } from '../Model/trending';
@@ -16,24 +17,36 @@ export class MainComponent {
 
   $trending_array?:Observable<Movie[]>;
   topRated_array?:Movie[];
+  upcoming_array?:Movie[];
   imageObject: Array<object>=[];
   titlearray?:Movie[];
+  head_array?:Movie;
+  head_array_B?:Movie;
+  head_array_A?:Movie;
 
   math = Math;
   imageURL:string = 'https://image.tmdb.org/t/p/original';
   image_url:string = 'https://image.tmdb.org/t/p/original';
-  head_array:any;
-  num:number = Math.floor(Math.random() * 19)
+  num:number = Math.floor(Math.random() * 19)+1
   switch?:boolean;
   switch2?:boolean;
   switch3?:boolean;
+  sidebar:Observable<boolean>;
+
   moviename:string = 'Trending';
+  Users?:any[];
 
 
-  constructor( private Trend:TmdbService ) {
+  constructor( public Trend:TmdbService ) {
+
+this.sidebar = this.Trend.$navbar
+console.log(this.sidebar)
 
     this.Trend.titlepic().subscribe(val =>{
-      this.head_array = val[this.num]
+      // console.log(val);
+  this.head_array = val[this.num];
+  this.head_array_B = val[this.num - 1];
+  this.head_array_A = val[this.num + 1];
     })
 
 this.$trending_array = combineLatest([
@@ -53,6 +66,16 @@ this.$trending_array = combineLatest([
 this.Trend.topRated().subscribe(val => {
   this.topRated_array = val
 })
+
+this.Trend.upcoming().subscribe(val => {
+  this.upcoming_array = val
+})
+
+this.Trend.users().subscribe(val => {
+  this.Users = val;
+})
+
+
 
   }
 
@@ -87,28 +110,32 @@ this.$tp.next(current == 'trending'? 'popular':'trending');
 
   min(){
 
-    if(this.num == 0){
-      this.num = 19
+    if(this.num == 1){
+      this.num = 17
     }else{
       this.num -= 1
     }
 
     this.Trend.titlepic().subscribe(val =>{
       this.head_array = val[this.num]
+      this.head_array_B = val[this.num - 1];
+      this.head_array_A = val[this.num + 1];
     })
 
     }
 
       add(){
 
-        if(this.num == 19){
-        this.num = 0
+        if(this.num == 17){
+        this.num = 1
         }else{
           this.num += 1
         }
 
         this.Trend.titlepic().subscribe(val =>{
           this.head_array = val[this.num]
+          this.head_array_A = val[this.num + 1];
+          this.head_array_B = val[this.num - 1];
         })
   }
 

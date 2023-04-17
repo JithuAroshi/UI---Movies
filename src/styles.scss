@@ -4,9 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "https://cssicon.space/css/icons.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+@import "https://cssicon.space/css/icons.css";
+@import 'ngx-toastr/toastr';
 
 *{
   font-family: 'Secular One', sans-serif;

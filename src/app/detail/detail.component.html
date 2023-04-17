@@ -1,21 +1,21 @@
 
-<div class="bg-primary-color">
+<div class="bg-primary-color pt-36">
   <section class="text-text-color bg-primary-color pb-6 md:pb-9 lg:pb-12">
     <div class="container md:w-full lg:h-[640px] mx-auto flex pb-24 md:py-12 md:pb-16 md:pr-16 flex-col md:flex-row items-center md:items-start md:justify-end relative">
 
-      <div class="h-full w-full mb-10 md:mb-0 relative md:absolute md:inset-0">
+      <div *ngIf="detail_array" class="h-full w-full mb-10 md:mb-0 relative md:absolute md:inset-0">
         <img class="md:hidden h-full w-full object-cover object-center relative " alt="hero" src="{{image_url}}{{detail_array.backdrop_path}}">
-        <div class="md:hidden absolute top-[10%] left-[5%] h-[80%] "><img class="h-full w-full" src="{{image_url}}{{detail_array.poster_path}}" alt=""></div>
+        <div class="md:hidden absolute top-[10%] left-[5%] h-[80%] aspect-[2/3]"><img class="h-full w-full" src="{{image_url}}{{detail_array.poster_path}}" alt=""></div>
 
         <img class="hidden md:flex h-full w-full object-cover object-center relative rounded md:opacity-25" alt="hero" src="{{image_url}}{{detail_array.backdrop_path}}">
         <div class="absolute hidden md:flex top-[8%] left-[3%] h-[80%] lg:h-[85%] rounded-lg"><img class="h-full w-full rounded-lg" src="{{image_url}}{{detail_array.poster_path}}" alt=""></div>
 
       </div>
       <div class="hidden md:flex h-12 md:w-[180%] lg:w-[800px] "></div>
-      <div class="flex flex-col md:items-start lg:items-center lg:justify-center md:text-left lg:h-full lg:w-full items-center text-center relative ">
+      <div *ngIf="detail_array" class="flex flex-col md:items-start lg:items-center lg:justify-center md:text-left lg:h-full lg:w-full items-center text-center relative ">
         <div class="flex items-center justify-around lg:justify-between lg:px-6 text-xl lg:text-4xl mb-4 font-medium text-text-color w-full ">
-          <p>{{detail_array.original_title}} <br> <span class="text-text2-color ">{{detail_array.release_date.slice(0,4)}}</span>  </p>
-
+          <p *ngIf="detail_array.original_title">{{detail_array.original_title}} <br> <span class="text-text2-color ">{{detail_array.release_date.slice(0,4)}}</span>  </p>
+          <p *ngIf="detail_array.original_name">{{detail_array.original_name}} <br> <span class="text-text2-color ">{{detail_array.release_date.slice(0,4)}}</span>  </p>
         </div>
 
   <div class="flex items-center justify-around lg:justify-start lg:gap-6 w-full px-6 py-3 ">
@@ -42,7 +42,12 @@
 
   </div>
 
-        <p class="w-full mb-8 leading-relaxed px-6 text-sm lg:text-base font-light text-text2-color md:text-text-color">{{detail_array.media_type}} | {{detail_array.original_language}}glish | {{detail_array.release_date}} <br> vote : {{detail_array.vote_count}} | popularity : {{detail_array.popularity}} </p>
+        <p *ngIf="detail_array.original_language == 'en' " class="w-full mb-8 leading-relaxed px-6 text-sm lg:text-base font-light text-text2-color md:text-text-color">{{detail_array.media_type}}  English | {{detail_array.release_date}} <br> Vote : {{detail_array.vote_count}} | Popularity : {{detail_array.popularity}} </p>
+        <p *ngIf="detail_array.original_language == 'pl' " class="w-full mb-8 leading-relaxed px-6 text-sm lg:text-base font-light text-text2-color md:text-text-color">{{detail_array.media_type}}  Polish | {{detail_array.release_date}} <br> Vote : {{detail_array.vote_count}} | Popularity : {{detail_array.popularity}} </p>
+        <p *ngIf="detail_array.original_language == 'ja' " class="w-full mb-8 leading-relaxed px-6 text-sm lg:text-base font-light text-text2-color md:text-text-color">{{detail_array.media_type}}  Japanese | {{detail_array.release_date}} <br> Vote : {{detail_array.vote_count}} | Popularity : {{detail_array.popularity}} </p>
+        <p *ngIf="detail_array.original_language == 'zh' " class="w-full mb-8 leading-relaxed px-6 text-sm lg:text-base font-light text-text2-color md:text-text-color">{{detail_array.media_type}}  Chinese | {{detail_array.release_date}} <br> Vote : {{detail_array.vote_count}} | Popularity : {{detail_array.popularity}} </p>
+        <p *ngIf="detail_array.original_language == 'es' " class="w-full mb-8 leading-relaxed px-6 text-sm lg:text-base font-light text-text2-color md:text-text-color">{{detail_array.media_type}}  Spanish | {{detail_array.release_date}} <br> Vote : {{detail_array.vote_count}} | Popularity : {{detail_array.popularity}} </p>
+
         <h1 class="text-xl lg:text-2xl font-medium mb-2 w-full flex justify-start px-6">Overview</h1>
         <p class="mb-4 leading-relaxed px-6 text-start text-sm lg:text-lg font-light text-text2-color md:text-text-color "> {{detail_array.overview}} </p>
 
@@ -53,7 +58,7 @@
 
   <!-- ------------------------------------------------------------------------Cast & Crew-------------------------------------------------------------------------- -->
 
-  <section class="text-text-color p-12 border-b-[0.5px] border-text2-color/20">
+  <section *ngIf="cast_array" class="text-text-color p-12 border-b-[0.5px] border-text2-color/20">
     <div *ngIf="cast_array.cast?.length != 0" class=" w-max text-2xl lg:text-3xl pr-4 mb-8 font-medium text-text-color border-b-[1px] border-highlight">Cast</div>
       <div class="flex flex-wrap -m-2 ">
         <div *ngFor="let cast of cast_array.cast.slice(0,6)" class="p-2 lg:w-1/3 md:w-1/2 w-full">
@@ -81,7 +86,7 @@
         </div>
       </div>
 
-<button (click)="CastCrew()" class="text-text2-color hover:text-text-color text-2xl pt-14 flex justify-center items-center">
+<button (click)="CastCrew()" class="text-text2-color hover:text-text-color text-sm md:text-lg lg:text-2xl pt-14 flex justify-center items-center">
   <p>Full Cast & Crew</p>
   <span class="material-symbols-rounded text-6xl -ml-3">
     arrow_drop_down
@@ -117,7 +122,7 @@
 
   <!-- ------------------------------------------------------------------------Reviews----------------------------------------------------------------------------------- -->
 
-  <section class="">
+  <section *ngIf="reviews" class="">
     <div class="container px-5 py-24 mx-auto">
       <h1 class="text-2xl lg:text-3xl font-medium title-font text-white mb-12 text-center pb-3 border-b-[1px] border-highlight">Reviews</h1>
       <div class="flex flex-wrap -m-4">
@@ -145,23 +150,23 @@
 
   <!-- -----------------------------------------------------------------------Posters----------------------------------------------------------------------- -->
 
-  <section class="">
+  <section *ngIf="posters" class="">
     <h1 class="text-2xl lg:text-3xl font-medium title-font text-white mb-12 text-center pb-3 mx-5 border-b-[1px] border-highlight">Posters</h1>
     <div class="container py-4 md:py-12 lg:py-24 mx-auto flex flex-wrap">
       <div class="flex flex-col md:flex-row justify-center items-center overflow-hidden opacity-60">
         <div class="flex w-1/2">
-          <div class="md:p-2 p-1 w-1/2  rotate-[15deg]">
+          <div class="md:p-2 p-1 w-[70%] md:w-1/2  rotate-[15deg]">
             <img alt="gallery" class="w-full object-cover h-full object-center block opacity-750" src="{{image_url}}{{posters.posters[12].file_path}}">
           </div>
-          <div class="md:p-2 p-1 w-1/2 -rotate-[25deg]">
+          <div class="md:p-2 p-1 w-[70%] md:w-1/2 -rotate-[25deg]">
             <img alt="gallery" class="w-full object-cover h-full object-center block opacity-750" src="{{image_url}}{{posters.posters[6].file_path}}">
           </div>
         </div>
-        <div class="flex w-1/2 ">
+        <div class="flex w-[70%] md:w-1/2 ">
           <div class="md:p-2 p-1 w-1/2 rotate-[10deg]">
             <img alt="gallery" class="w-full object-cover h-full object-center block opacity-750" src="{{image_url}}{{posters.posters[8].file_path}}">
           </div>
-          <div class="md:p-2 p-1 w-1/2 rotate-[30deg]">
+          <div class="md:p-2 p-1 w-[70%] md:w-1/2 rotate-[30deg]">
             <img alt="gallery" class="w-full object-cover h-full object-center block opacity-750" src="{{image_url}}{{posters.posters[9].file_path}}">
           </div>
         </div>
@@ -173,7 +178,7 @@
 
   <div *ngIf="$similar_array?.length != 0" class=" w-max text-2xl lg:text-3xl pr-4 mx-4 md:mx-8 lg:mx-16 mt-10 mb-2 md:mb-4 lg:mb-8 font-medium border-b-[1px] border-highlight text-text-color ">Similar Movies</div>
 
-  <div class="w-full flex  overflow-x-scroll overflow-y-hidden border-b-[0.5px] border-text2-color/20">
+  <div *ngIf="$similar_array" class="w-full flex  overflow-x-scroll overflow-y-hidden border-b-[0.5px] border-text2-color/20">
     <div *ngFor="let trend of $similar_array" class="h-full w-full flex flex-col item-start p-3 md:p-4 relative " [routerLink]="['/detailpage',trend.id]">
       <div class="h-52 w-36 md:h-60 md:w-44 lg:h-72 lg:w-52 z-10 relative " >
         <img class="h-full w-full object-contain rounded-md " src="{{image_url}}{{trend.poster_path}}" alt="">
@@ -186,7 +191,8 @@
         </div>
       </div>
       <div class="p-1 mt-9 w-full">
-        <p class="text-sm md:text-base font-medium text-text-color relative"> {{trend.original_title}} </p>
+        <p *ngIf="trend.original_title" class="text-sm md:text-base font-medium text-text-color relative"> {{trend.original_title}} </p>
+        <p *ngIf="trend.original_name" class="text-sm md:text-base font-medium text-text-color relative"> {{trend.original_name}} </p>
         <p class="text-sm md:text-base text-text2-color relative"> {{trend.release_date}} </p>
       </div>
     </div>
@@ -194,7 +200,7 @@
 
   <div *ngIf="$recommended_array?.length != 0" class=" w-max text-2xl lg:text-3xl pr-4 mx-4 md:mx-8 lg:mx-16 mt-10 mb-2 md:mb-4 lg:mb-8 font-medium border-b-[1px] border-highlight text-text-color ">Recommended Movies</div>
 
-  <div class="w-full flex  overflow-x-scroll overflow-y-hidden border-b-[0.5px] border-text2-color/20">
+  <div *ngIf="$recommended_array" class="w-full flex  overflow-x-scroll overflow-y-hidden border-b-[0.5px] border-text2-color/20">
     <div *ngFor="let trend of $recommended_array" class="h-full w-full flex flex-col item-start p-3 md:p-4 relative " [routerLink]="['/detailpage',trend.id]">
       <div class="h-52 w-36 md:h-60 md:w-44 lg:h-72 lg:w-52 z-10 relative " >
         <img class="h-full w-full object-contain rounded-md " src="{{image_url}}{{trend.poster_path}}" alt="">
@@ -207,7 +213,8 @@
         </div>
       </div>
       <div class="p-1 mt-9 w-full">
-        <p class="text-sm md:text-base font-medium text-text-color relative"> {{trend.original_title}} </p>
+        <p *ngIf="trend.original_title" class="text-sm md:text-base font-medium text-text-color relative"> {{trend.original_title}} </p>
+        <p *ngIf="trend.original_name" class="text-sm md:text-base font-medium text-text-color relative"> {{trend.original_name}} </p>
         <p class="text-sm md:text-base text-text2-color relative"> {{trend.release_date}} </p>
       </div>
     </div>

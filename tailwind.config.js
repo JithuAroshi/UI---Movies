@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         'highlight': 'rgb(255 0 0)',
-        'primary-color': 'rgb(0 0 0)',
+        'primary-color': 'rgb(20 20 20)',
         'text-color': 'white',
         'text2-color': 'rgb(153,153,153)',
       },

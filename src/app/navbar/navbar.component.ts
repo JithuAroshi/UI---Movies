@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { TmdbService } from '../service/tmdb.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,10 +14,16 @@ export class NavbarComponent {
   Search!:string;
 
 
-  constructor() { }
+  trueValue:boolean=true
 
-  Menuchange(){
+  constructor( private service : TmdbService ) { }
+
+  Menuchange(data:boolean){
 this.menu = !this.menu
+
+this.trueValue=data
+this.service.$navbar.next(data)
+
   }
 
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Movie, Movies } from '../Model/trending';
 
 @Injectable({
@@ -11,8 +11,10 @@ export class TmdbService {
   constructor( private http:HttpClient ) {  }
 
   base_url:string = 'https://api.themoviedb.org/3/'
-  API_key:string = '63a67cc937a4637ce438eac6a0a4cdb4'
+  API_key:string = '63a67cc937a4637ce438eac6a0a4cdb4';
   public detailfilm:any;
+
+  $navbar = new BehaviorSubject<boolean>(true)
 
   trending(day:string,type:string):Observable<Movie[]>{
     return this.http.get <Movies> (`${this.base_url}/trending/${type}/${day}`,{
@@ -32,6 +34,14 @@ export class TmdbService {
 
   topRated():Observable<Movie[]>{
     return this.http.get <Movies> (`${this.base_url}/movie/top_rated`,{
+      params:{
+        api_key:this.API_key
+      }
+    }).pipe(map(res => res.results))
+  }
+
+  upcoming():Observable<Movie[]>{
+    return this.http.get <Movies> (`${this.base_url}/movie/upcoming`,{
       params:{
         api_key:this.API_key
       }
@@ -114,5 +124,16 @@ export class TmdbService {
       }
     })
   }
+
+  // -----------------------------------------------------------------Users-------------------------------------------------
+
+  users(){
+    return this.http.get<any>('https://dummyjson.com/users')
+    .pipe(map(res => res.users))
+  }
+
+Navchange(nav:boolean){
+return nav
+}
 
 }

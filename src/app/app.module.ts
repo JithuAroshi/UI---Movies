@@ -9,9 +9,13 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailComponent } from './detail/detail.component';
 import {YouTubePlayerModule} from '@angular/youtube-player';
+import { LoginComponent } from './login/login.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import {YouTubePlayerModule} from '@angular/youtube-player';
     NavbarComponent,
     FooterComponent,
     SearchComponent,
-    DetailComponent
+    DetailComponent,
+    LoginComponent,
+    UserdetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,10 @@ import {YouTubePlayerModule} from '@angular/youtube-player';
     HttpClientModule,
     NgImageSliderModule,
     FormsModule,
-    YouTubePlayerModule
+    YouTubePlayerModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
